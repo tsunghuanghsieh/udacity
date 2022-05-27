@@ -73,7 +73,7 @@ class Artist(db.Model):
     city = db.Column(db.String(120))
     state = db.Column(db.String(120))
     phone = db.Column(db.String(120))
-    genres = db.Column(db.String(120))
+    genres = db.Column(db.String(256))
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))
 
@@ -81,6 +81,18 @@ class Artist(db.Model):
     website = db.Column(db.String(512))
     seeking_venue = db.Column(db.Boolean)
     seeking_description = db.Column(db.String)
+
+    def __init__(self, data):
+      self.name = data['name']
+      self.city = data['city']
+      self.state = data['state']
+      self.phone = data['phone']
+      self.image_link = data['image_link']
+      self.facebook_link = data['facebook_link']
+      self.genres = data['genres']
+      self.website = data['website']
+      self.seeking_venue = data['seeking_venue']
+      self.seeking_description = data['seeking_description']
 
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
 
