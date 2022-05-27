@@ -2,6 +2,8 @@
 # Imports
 #----------------------------------------------------------------------------#
 
+import sys
+
 import json
 import dateutil.parser
 import babel
@@ -13,6 +15,9 @@ import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
 from forms import *
+
+import apphelper
+
 #----------------------------------------------------------------------------#
 # App Config.
 #----------------------------------------------------------------------------#
@@ -42,11 +47,23 @@ class Venue(db.Model):
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))
 
-    # TODO: implement any missing fields, as a database migration using Flask-Migrate
-    genres = db.Column(db.String(120))
+    genres = db.Column(db.String(256))
     website = db.Column(db.String(512))
     seeking_talent = db.Column(db.Boolean)
     seeking_description = db.Column(db.String)
+
+    def __init__(self, data):
+      self.name = data['name']
+      self.city = data['city']
+      self.state = data['state']
+      self.address = data['address']
+      self.phone = data['phone']
+      self.image_link = data['image_link']
+      self.facebook_link = data['facebook_link']
+      self.genres = data['genres']
+      self.website = data['website']
+      self.seeking_talent = data['seeking_talent']
+      self.seeking_description = data['seeking_description']
 
 class Artist(db.Model):
     __tablename__ = 'artists' # It doesn't like capital A in table name
