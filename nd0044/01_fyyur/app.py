@@ -124,29 +124,46 @@ def index():
 
 @app.route('/venues')
 def venues():
-  # TODO: replace with real venues data.
-  #       num_upcoming_shows should be aggregated based on number of upcoming shows per venue.
-  data=[{
-    "city": "San Francisco",
-    "state": "CA",
-    "venues": [{
-      "id": 1,
-      "name": "The Musical Hop",
-      "num_upcoming_shows": 0,
-    }, {
-      "id": 3,
-      "name": "Park Square Live Music & Coffee",
-      "num_upcoming_shows": 1,
-    }]
-  }, {
-    "city": "New York",
-    "state": "NY",
-    "venues": [{
-      "id": 2,
-      "name": "The Dueling Pianos Bar",
-      "num_upcoming_shows": 0,
-    }]
-  }]
+  venues = db.session.query(Venue).group_by(Venue.id, Venue.state)
+  state = city = None
+  diffState = diffCity = False
+  data = []
+  for venue in venues:
+    if state != venue.state:
+      state = venue.state
+      diffState = True
+    else:
+      diffState = False
+    if city != venue.city:
+      city = venue.city
+      diffCity = True
+    else:
+      diffCity = False
+
+    if (diffState or diffCity):
+      data_area = {
+        "city": city,
+        "state": state,
+        "venues": [{
+          "id": venue.id,
+          "name": venue.name,
+          # TODO QUESTION: num_upcoming_shows should be aggregated based on number of upcoming shows per venue.
+          "num_upcoming_shows": 0
+        }]
+      }
+      data.append(data_area)
+    else:
+      data_venue = {
+        "id": venue.id,
+        "name": venue.name,
+          # TODO QUESTION: num_upcoming_shows should be aggregated based on number of upcoming shows per venue.
+        "num_upcoming_shows": 1
+      }
+      data_area = data.pop()
+      data_area['venues'].append(data_venue)
+      data.append(data_area)
+    # DEBUG
+    print(data)
   return render_template('pages/venues.html', areas=data);
 
 @app.route('/venues/search', methods=['POST'])
