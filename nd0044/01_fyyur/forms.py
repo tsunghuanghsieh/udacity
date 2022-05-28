@@ -126,6 +126,19 @@ class VenueForm(Form):
         'seeking_description'
     )
 
+    # overwriting populate_obj
+    def populate_obj(this, venue):
+        this.name.data = venue.name
+        this.city.data = venue.city
+        this.state.data = venue.state
+        this.address.data = venue.address
+        this.phone.data = venue.phone
+        this.image_link.data = venue.image_link
+        this.genres.data = venue.genres
+        this.facebook_link.data = venue.facebook_link
+        this.website_link.data = venue.website
+        this.seeking_talent.data = venue.seeking_talent
+        this.seeking_description.data = venue.seeking_description
 
 
 class ArtistForm(Form):
@@ -237,3 +250,15 @@ class ArtistForm(Form):
             'seeking_description'
      )
 
+    # overwriting populate_obj
+    def populate_obj(this, artist):
+        this.name.data = artist.name
+        this.city.data = artist.city
+        this.state.data = artist.state
+        this.phone.data = artist.phone
+        this.image_link.data = artist.image_link
+        this.genres.data = artist.genres
+        this.facebook_link.data = artist.facebook_link
+        this.website_link.data = artist.website
+        this.seeking_venue.data = artist.seeking_venue
+        this.seeking_description.data = artist.seeking_description
