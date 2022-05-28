@@ -126,6 +126,21 @@ class VenueForm(Form):
         'seeking_description'
     )
 
+    def transform_for_query(this):
+        return {
+            "name": this.name.data,
+            "city": this.city.data,
+            "state": this.state.data,
+            "address": this.address.data,
+            "phone": this.phone.data,
+            "image_link": this.image_link.data,
+            "genres": this.genres.data,
+            "facebook_link": this.facebook_link.data,
+            "website": this.website_link.data,
+            "seeking_talent": this.seeking_talent.data,
+            "seeking_description": this.seeking_description.data
+        }
+
     # overwriting populate_obj
     def populate_obj(this, venue):
         this.name.data = venue.name
@@ -249,6 +264,20 @@ class ArtistForm(Form):
     seeking_description = StringField(
             'seeking_description'
      )
+
+    def transform_for_query(this):
+        return {
+            "name": this.name.data,
+            "city": this.city.data,
+            "state": this.state.data,
+            "phone": this.phone.data,
+            "image_link": this.image_link.data,
+            "genres": this.genres.data,
+            "facebook_link": this.facebook_link.data,
+            "website": this.website_link.data,
+            "seeking_venue": this.seeking_venue.data,
+            "seeking_description": this.seeking_description.data
+        }
 
     # overwriting populate_obj
     def populate_obj(this, artist):

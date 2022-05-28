@@ -65,6 +65,19 @@ class Venue(db.Model):
       self.seeking_talent = data['seeking_talent']
       self.seeking_description = data['seeking_description']
 
+    def update(self, data):
+      self.name = data['name']
+      self.city = data['city']
+      self.state = data['state']
+      self.address = data['address']
+      self.phone = data['phone']
+      self.image_link = data['image_link']
+      self.facebook_link = data['facebook_link']
+      self.genres = data['genres']
+      self.website = data['website']
+      self.seeking_talent = data['seeking_talent']
+      self.seeking_description = data['seeking_description']
+
 class Artist(db.Model):
     __tablename__ = 'artists' # It doesn't like capital A in table name
 
@@ -83,6 +96,18 @@ class Artist(db.Model):
     seeking_description = db.Column(db.String)
 
     def __init__(self, data):
+      self.name = data['name']
+      self.city = data['city']
+      self.state = data['state']
+      self.phone = data['phone']
+      self.image_link = data['image_link']
+      self.facebook_link = data['facebook_link']
+      self.genres = data['genres']
+      self.website = data['website']
+      self.seeking_venue = data['seeking_venue']
+      self.seeking_description = data['seeking_description']
+
+    def update(self, data):
       self.name = data['name']
       self.city = data['city']
       self.state = data['state']
@@ -437,8 +462,18 @@ def edit_artist(artist_id):
 
 @app.route('/artists/<int:artist_id>/edit', methods=['POST'])
 def edit_artist_submission(artist_id):
-  # TODO: take values from the form submitted, and update existing
-  # artist record with ID <artist_id> using the new attributes
+  try:
+    artist = Artist.query.get(artist_id)
+    form = ArtistForm()
+    data = form.transform_for_query()
+    data['genres'] = apphelper.serialize_genres(data['genres'])
+    artist.update(data)
+    db.session.commit()
+  except:
+    print(sys.exc_info())
+    db.session.rollback()
+  finally:
+    db.session.close()
 
   return redirect(url_for('show_artist', artist_id=artist_id))
 
@@ -452,8 +487,18 @@ def edit_venue(venue_id):
 
 @app.route('/venues/<int:venue_id>/edit', methods=['POST'])
 def edit_venue_submission(venue_id):
-  # TODO: take values from the form submitted, and update existing
-  # venue record with ID <venue_id> using the new attributes
+  try:
+    venue = Venue.query.get(venue_id)
+    form = VenueForm()
+    data = form.transform_for_query()
+    data['genres'] = apphelper.serialize_genres(data['genres'])
+    venue.update(data)
+    db.session.commit()
+  except:
+    print(sys.exc_info())
+    db.session.rollback()
+  finally:
+    db.session.close()
   return redirect(url_for('show_venue', venue_id=venue_id))
 
 #  Create Artist
