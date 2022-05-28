@@ -464,10 +464,7 @@ def edit_artist(artist_id):
 def edit_artist_submission(artist_id):
   try:
     artist = Artist.query.get(artist_id)
-    form = ArtistForm()
-    data = form.transform_for_query()
-    data['genres'] = apphelper.serialize_genres(data['genres'])
-    artist.update(data)
+    artist.update(apphelper.getArtistData(request.form))
     db.session.commit()
   except:
     print(sys.exc_info())
@@ -489,10 +486,7 @@ def edit_venue(venue_id):
 def edit_venue_submission(venue_id):
   try:
     venue = Venue.query.get(venue_id)
-    form = VenueForm()
-    data = form.transform_for_query()
-    data['genres'] = apphelper.serialize_genres(data['genres'])
-    venue.update(data)
+    venue.update(apphelper.getVenueData(request.form))
     db.session.commit()
   except:
     print(sys.exc_info())
