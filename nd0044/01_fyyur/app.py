@@ -353,7 +353,7 @@ def delete_venue(venue_id):
 #  ----------------------------------------------------------------
 @app.route('/artists')
 def artists():
-  return render_template('pages/artists.html', artists=Artist.query.all())
+  return render_template('pages/artists.html', artists=Artist.query.order_by('id').all())
 
 @app.route('/artists/search', methods=['POST'])
 def search_artists():
