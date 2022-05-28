@@ -302,19 +302,7 @@ def create_venue_form():
 
 @app.route('/venues/create', methods=['POST'])
 def create_venue_submission():
-  data = {
-    "name": request.form['name'],
-    "genres": apphelper.serialize_genres(request.form.getlist('genres')),
-    "address": request.form['address'],
-    "city": request.form['city'],
-    "state": request.form['state'],
-    "phone": request.form['phone'],
-    "website": request.form['website_link'],
-    "facebook_link": request.form['facebook_link'],
-    "seeking_talent": request.form['seeking_talent'] if ('seeking_talent' in request.form.keys()) else False,
-    "seeking_description": request.form['seeking_description'],
-    "image_link": request.form['image_link'],
-  }
+  data = apphelper.getVenueData(request.form)
   isVenueAdded = True
   try:
     venue = Venue(data)
@@ -505,18 +493,7 @@ def create_artist_form():
 
 @app.route('/artists/create', methods=['POST'])
 def create_artist_submission():
-  data = {
-    "name": request.form['name'],
-    "genres": apphelper.serialize_genres(request.form.getlist('genres')),
-    "city": request.form['city'],
-    "state": request.form['state'],
-    "phone": request.form['phone'],
-    "website": request.form['website_link'],
-    "facebook_link": request.form['facebook_link'],
-    "seeking_venue": request.form['seeking_venue'] if ('seeking_venue' in request.form.keys()) else False,
-    "seeking_description": request.form['seeking_description'],
-    "image_link": request.form['image_link'],
-  }
+  data = apphelper.getArtistData(request.form)
   isArtistAdded = True
   try:
     artist = Artist(data)
