@@ -587,6 +587,10 @@ def shows():
   }]
   return render_template('pages/shows.html', shows=data)
 
+@app.route('/shows/search', methods=['POST'])
+def search_showss():
+  return render_template('pages/show.html')
+
 @app.route('/shows/create')
 def create_shows():
   # renders form. do not touch.
