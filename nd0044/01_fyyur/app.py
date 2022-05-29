@@ -29,8 +29,6 @@ db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
 
-# TODO: connect to a local postgresql database
-
 #----------------------------------------------------------------------------#
 # Models.
 #----------------------------------------------------------------------------#
@@ -95,7 +93,6 @@ class Artist(db.Model):
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))
 
-    # TODO: implement any missing fields, as a database migration using Flask-Migrate
     website = db.Column(db.String(512))
     seeking_venue = db.Column(db.Boolean)
     seeking_description = db.Column(db.String)
@@ -208,8 +205,6 @@ def venues():
       data_area = data.pop()
       data_area['venues'].append(data_venue)
       data.append(data_area)
-    # DEBUG
-    print(data)
   return render_template('pages/venues.html', areas=data);
 
 @app.route('/venues/search', methods=['POST'])
