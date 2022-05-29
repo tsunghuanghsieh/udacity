@@ -57,7 +57,7 @@ app.jinja_env.filters['datetime'] = format_datetime
 
 @app.route('/')
 def index():
-  return render_template('pages/home.html')
+  return render_template('pages/home.html', venues=apphelper.getRecent(Venue), artists=apphelper.getRecent(Artist))
 
 
 #  Venues
@@ -181,7 +181,7 @@ def create_venue_submission():
     flash('Venue ' + request.form['name'] + ' was successfully listed!')
   else:
     flash('An error occurred. Venue ' + data['name'] + ' could not be listed.')
-  return render_template('pages/home.html')
+  return redirect(url_for('index'))
 
 @app.route('/venues/<venue_id>', methods=['DELETE'])
 def delete_venue(venue_id):
@@ -196,7 +196,7 @@ def delete_venue(venue_id):
 
   # BONUS CHALLENGE: Implement a button to delete a Venue on a Venue Page, have it so that
   # clicking that button delete it from the db then redirect the user to the homepage
-  return render_template('pages/home.html')
+  return redirect(url_for('index'))
 
 #  Artists
 #  ----------------------------------------------------------------
@@ -323,7 +323,7 @@ def create_artist_submission():
     flash('Artist ' + request.form['name'] + ' was successfully listed!')
   else:
     flash('An error occurred. Artist ' + data.name + ' could not be listed.')
-  return render_template('pages/home.html')
+  return redirect(url_for('index'))
 
 
 #  Shows
@@ -390,7 +390,7 @@ def create_show_submission():
     flash('Show was successfully listed!')
   else:
     flash('An error occurred. Show could not be listed.')
-  return render_template('pages/home.html')
+  return redirect(url_for('index'))
 
 @app.errorhandler(404)
 def not_found_error(error):

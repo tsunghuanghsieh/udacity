@@ -19,6 +19,17 @@ def getArtistData(form):
     "image_link": form['image_link'],
   }
 
+def getRecent(model):
+  results = model.query.order_by(model.id.desc()).limit(10).all()
+  items = []
+  for result in results:
+    item = {
+      "id": result.id,
+      "name": result.name
+    }
+    items.append(item)
+  return items
+
 def getVenueData(form):
   return {
     "name": remove_extra_whitespace(form['name']),
