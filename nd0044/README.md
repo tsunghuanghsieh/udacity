@@ -12,4 +12,4 @@ conda activate fyyur
 
 In the Python 3.6 environment created earlier, from `01_fyyur` folder, run `pip install -r requirements.txt` to set up development environment, followed by `./createdb.sh fyyur` to create a database named `fyyur` in Postgres, `flask db upgrade` to create tables in database `fyyur`, and `psql -d fyyur -f ./createdata.psql` to populate initial mocked data in the database tables `artists`, `venues` and `shows`.
 
-Once the development environment is set up, run `./runapp.sh app.py` and launch `http://localhost:5000` in the browser to start the `Flask` app.
+Once the development environment is set up, run `./runapp.sh app.py` and launch http://localhost:5000 in the browser to start the `Flask` app.
