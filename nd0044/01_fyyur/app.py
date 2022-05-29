@@ -52,6 +52,11 @@ class Venue(db.Model):
     seeking_talent = db.Column(db.Boolean)
     seeking_description = db.Column(db.String)
 
+    # relationship.backref is a shortcut for 2 relationship.back_populates in both classes,
+    # in this case, Venue and Show class.
+    # https://docs.sqlalchemy.org/en/14/orm/backref.html#relationships-backref
+    shows = db.relationship('Show', backref="venues", lazy=True)
+
     def __init__(self, data):
       self.name = data['name']
       self.city = data['city']
@@ -95,6 +100,11 @@ class Artist(db.Model):
     seeking_venue = db.Column(db.Boolean)
     seeking_description = db.Column(db.String)
 
+    # relationship.backref is a shortcut for 2 relationship.back_populates in both classes,
+    # in this case, Artist and Show class.
+    # https://docs.sqlalchemy.org/en/14/orm/backref.html#relationships-backref
+    shows = db.relationship('Show', backref="artists", lazy=True)
+
     def __init__(self, data):
       self.name = data['name']
       self.city = data['city']
@@ -119,7 +129,18 @@ class Artist(db.Model):
       self.seeking_venue = data['seeking_venue']
       self.seeking_description = data['seeking_description']
 
-# TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
+class Show(db.Model):
+    __tablename__ = 'shows'
+
+    id = db.Column(db.Integer, primary_key=True)
+    artist_id = db.Column(db.Integer, db.ForeignKey('artists.id'), primary_key = True, nullable = False)
+    venue_id = db.Column(db.Integer, db.ForeignKey('venues.id'), primary_key = True, nullable = False)
+    start_time = db.Column(db.String(20))
+
+    def __init__(self, data):
+      self.artist_id = data['artist_id']
+      self.venue_id = data['venue_id']
+      self.start_time = data['start_time']
 
 #----------------------------------------------------------------------------#
 # Filters.
