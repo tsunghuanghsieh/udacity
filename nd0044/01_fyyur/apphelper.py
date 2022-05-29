@@ -1,4 +1,3 @@
-import apphelper
 
 DELIMITER = ";"
 
@@ -8,7 +7,7 @@ def deserialize_genres(genres):
 def getArtistData(form):
   return {
     "name": form['name'],
-    "genres": apphelper.serialize_genres(form.getlist('genres')),
+    "genres": serialize_genres(form.getlist('genres')),
     "city": form['city'],
     "state": form['state'],
     "phone": form['phone'],
@@ -22,7 +21,7 @@ def getArtistData(form):
 def getVenueData(form):
   return {
     "name": form['name'],
-    "genres": apphelper.serialize_genres(form.getlist('genres')),
+    "genres": serialize_genres(form.getlist('genres')),
     "address": form['address'],
     "city": form['city'],
     "state": form['state'],
