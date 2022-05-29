@@ -3,6 +3,7 @@
 #----------------------------------------------------------------------------#
 
 import sys
+import re
 
 import json
 import dateutil.parser
@@ -14,6 +15,7 @@ from flask_migrate import Migrate
 import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
+import sqlalchemy
 from forms import *
 
 import apphelper
@@ -105,7 +107,17 @@ def venues():
 
 @app.route('/venues/search', methods=['POST'])
 def search_venues():
-  result = Venue.query.filter(Venue.name.ilike("%{}%".format(request.form['search_term']))).all()
+  sanitized_string = apphelper.remove_extra_whitespace(request.form['search_term'])
+  terms = re.split(' |,', sanitized_string)
+  result = Venue.query.filter(
+            sqlalchemy.or_(
+              Venue.name.ilike("%{}%".format(sanitized_string)),
+              sqlalchemy.and_(
+                Venue.state.ilike("%{}%".format(terms[-1])),
+                Venue.city.ilike("%{}%".format(' '.join(terms[0:-1]).strip()))
+              )
+            )
+          ).all()
   response = {
     "count": len(result),
     "data": []
@@ -194,7 +206,17 @@ def artists():
 
 @app.route('/artists/search', methods=['POST'])
 def search_artists():
-  result = Artist.query.filter(Artist.name.ilike("%{}%".format(request.form['search_term']))).all()
+  sanitized_string = apphelper.remove_extra_whitespace(request.form['search_term'])
+  terms = re.split(' |,', sanitized_string)
+  result = Artist.query.filter(
+            sqlalchemy.or_(
+              Artist.name.ilike("%{}%".format(sanitized_string)),
+              sqlalchemy.and_(
+                Artist.state.ilike("%{}%".format(terms[-1])),
+                Artist.city.ilike("%{}%".format(' '.join(terms[0:-1]).strip()))
+              )
+            )
+          ).all()
   response = {
     "count": len(result),
     "data": []

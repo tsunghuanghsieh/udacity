@@ -1,3 +1,4 @@
+import re
 
 DELIMITER = ";"
 
@@ -6,9 +7,9 @@ def deserialize_genres(genres):
 
 def getArtistData(form):
   return {
-    "name": form['name'],
+    "name": remove_extra_whitespace(form['name']),
     "genres": serialize_genres(form.getlist('genres')),
-    "city": form['city'],
+    "city": remove_extra_whitespace(form['city']),
     "state": form['state'],
     "phone": form['phone'],
     "website": form['website_link'],
@@ -20,10 +21,10 @@ def getArtistData(form):
 
 def getVenueData(form):
   return {
-    "name": form['name'],
+    "name": remove_extra_whitespace(form['name']),
     "genres": serialize_genres(form.getlist('genres')),
-    "address": form['address'],
-    "city": form['city'],
+    "address": remove_extra_whitespace(form['address']),
+    "city": remove_extra_whitespace(form['city']),
     "state": form['state'],
     "phone": form['phone'],
     "website": form['website_link'],
@@ -32,6 +33,9 @@ def getVenueData(form):
     "seeking_description": form['seeking_description'],
     "image_link": form['image_link'],
   }
+
+def remove_extra_whitespace(sstring):
+  return re.sub(' +', ' ', sstring.strip())
 
 def serialize_genres(genres):
   return DELIMITER.join(genres)
