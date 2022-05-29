@@ -25,8 +25,8 @@ def upgrade():
     sa.Column('artist_id', sa.Integer(), nullable=False),
     sa.Column('venue_id', sa.Integer(), nullable=False),
     sa.Column('start_time', sa.String(length=20), nullable=True),
-    sa.ForeignKeyConstraint(['artist_id'], ['artists.id'], ),
-    sa.ForeignKeyConstraint(['venue_id'], ['venues.id'], ),
+    sa.ForeignKeyConstraint(['artist_id'], ['artists.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['venue_id'], ['venues.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id', 'artist_id', 'venue_id')
    )
     op.execute('ALTER SEQUENCE shows_id_seq OWNED BY shows.id;')
