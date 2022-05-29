@@ -447,7 +447,21 @@ def create_show_submission():
     "start_time": request.form['start_time']
   }
 
-  isShowAdded = True
+  hasError = False
+  # couldn't get validators to work on form, explicitly handle errors here
+  if (not str.isdigit(request.form['artist_id'])) or (not str.isdigit(request.form['venue_id'])):
+    flash('ID has to be an integer')
+    hasError = True
+  if (Artist.query.get(data['artist_id']) == None):
+    flash('Artist ID does not exist in database')
+    hasError = True
+  if (Venue.query.get(data['venue_id']) == None):
+    flash('Venue ID does not exist in database')
+    hasError = True
+  if (hasError):
+    form = ShowForm()
+    return render_template('forms/new_show.html', form=form)
+
   try:
     show = Show(data)
     db.session.add(show)
@@ -455,11 +469,11 @@ def create_show_submission():
   except:
     print(sys.exc_info())
     db.session.rollback()
-    isShowAdded = False
+    hasError = True
   finally:
     db.session.close()
 
-  if (isShowAdded):
+  if (not hasError):
     flash('Show was successfully listed!')
   else:
     flash('An error occurred. Show could not be listed.')
