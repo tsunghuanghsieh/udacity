@@ -1,0 +1,7 @@
+DROP DATABASE IF EXISTS plantsdb;
+DROP USER IF EXISTS vegetarian;
+CREATE DATABASE plantsdb;
+CREATE USER vegetarian;
+GRANT ALL PRIVILEGES ON DATABASE plantsdb TO vegetarian;
+ALTER USER vegetarian CREATEDB;
+ALTER USER vegetarian WITH SUPERUSER;

@@ -1,0 +1,42 @@
+CREATE SEQUENCE plants_id_seq;
+
+
+CREATE TABLE IF NOT EXISTS plants (
+    id INTEGER NOT NULL DEFAULT nextval('plants_id_seq'),
+    name TEXT,
+    scientific_name TEXT,
+    is_poisonous BOOLEAN,
+    primary_color TEXT
+);
+
+ALTER SEQUENCE plants_id_seq OWNED BY plants.id;
+
+INSERT INTO plants (
+    id,
+    name,
+    scientific_name,
+    is_poisonous,
+    primary_color
+) VALUES (
+    1,
+    'Hydrangea',
+    'Hydrangea macrophylla',
+    True,
+    'blue'
+) ON CONFLICT DO NOTHING;
+
+INSERT INTO plants (
+    id,
+    name,
+    scientific_name,
+    is_poisonous,
+    primary_color
+) VALUES (
+    2,
+    'Oleander',
+    'Nerium oleander',
+    True,
+    'pink'
+) ON CONFLICT DO NOTHING;
+
+select setval('plants_id_seq', (select max(id) from plants));
