@@ -19,3 +19,4 @@ Once the development environment is set up, run `./runapp.sh app.py` and launch 
 ## API Development and Documentation
 For this section, you will need Python 3.7. You can run `source ./source02.sh` to set up your development environment and `source ./teardown02.sh` to tear down.
 ### [Plants](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/plants)
+### [Bookshelf](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/bookshelf)
