@@ -114,4 +114,28 @@ def create_app(test_config=None):
             # 'total_books': len(formatted_books)
         })
 
+    @app.errorhandler(400)
+    def handle_bad_request():
+        return jsonify({
+            'success': False,
+            'error': 400,
+            'message': "Bad Request"
+        }), 400
+
+    @app.errorhandler(404)
+    def handle_not_found():
+        return jsonify({
+            'success': False,
+            'error': 404,
+            'message': "Not Found"
+        }), 404
+
+    @app.errorhandler(405)
+    def handle_method_not_allowed():
+        return jsonify({
+            'success': False,
+            'error': 405,
+            'message': "Method Not Allowed"
+        }), 405
+
     return app
