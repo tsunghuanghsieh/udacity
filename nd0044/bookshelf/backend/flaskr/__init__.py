@@ -92,27 +92,38 @@ def create_app(test_config=None):
         body = request.get_json()
         if (body is None):
             abort(400)
-        title = body.get('title', None)
-        author = body.get('author', None)
-        rating = body.get('rating', None)
-        book = Book(title, author, rating)
-        book.insert()
-        #
-        # empirical data shows the newly added book doesn't show up on frontend immediately
-        # even in the solution provided in class. returning books doesn't seem to do anything.
-        # not returning books doesn't trigger any visual error.
-        #
-        # books = Book.query.order_by('id').all()
-        # formatted_books = [ book.format() for book in books ]
-        # last_page_start = (int(len(formatted_books) / BOOKS_PER_SHELF) - 1) * BOOKS_PER_SHELF
-        # end = last_page_start + BOOKS_PER_SHELF
-        # print(len(formatted_books))
-        return jsonify({
-            'success': True,
-            'created': book.id,
-            # 'books': formatted_books[last_page_start:end],
-            # 'total_books': len(formatted_books)
-        })
+
+        if ('search' in body):
+            search = body.get('search')
+            books = Book.query.filter(Book.title.ilike("%{}%".format(search))).all()
+            print("search " + search)
+            print(len(books))
+            return jsonify({
+                'success': True,
+                'total_books': len(books)
+            })
+        else:
+            title = body.get('title', None)
+            author = body.get('author', None)
+            rating = body.get('rating', None)
+            book = Book(title, author, rating)
+            book.insert()
+            #
+            # empirical data shows the newly added book doesn't show up on frontend immediately
+            # even in the solution provided in class. returning books doesn't seem to do anything.
+            # not returning books doesn't trigger any visual error.
+            #
+            # books = Book.query.order_by('id').all()
+            # formatted_books = [ book.format() for book in books ]
+            # last_page_start = (int(len(formatted_books) / BOOKS_PER_SHELF) - 1) * BOOKS_PER_SHELF
+            # end = last_page_start + BOOKS_PER_SHELF
+            # print(len(formatted_books))
+            return jsonify({
+                'success': True,
+                'created': book.id,
+                # 'books': formatted_books[last_page_start:end],
+                # 'total_books': len(formatted_books)
+            })
 
     @app.errorhandler(400)
     def handle_bad_request(err):

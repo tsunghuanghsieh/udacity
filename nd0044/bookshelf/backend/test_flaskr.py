@@ -86,6 +86,24 @@ class BookTestCase(unittest.TestCase):
         res = self.client().post(endpoint, json = self.new_book)
         self.assertEqual(res.status_code, 405)
 
+    def test_find_existing_book_by_title(self):
+        """Test POST Find Existing Book By Title"""
+        search_title = "Immigrant, Montana"
+        endpoint = "/books"
+        res = self.client().post(endpoint, json = { 'search': search_title })
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['total_books'])
+
+    def test_find_nonexisting_book_by_title(self):
+        """Test POST Find Nonexisting Book By Title"""
+        search_title = "My Book"
+        endpoint = "/books"
+        res = self.client().post(endpoint, json = { 'search': search_title })
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertFalse(data['total_books'])
+
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
