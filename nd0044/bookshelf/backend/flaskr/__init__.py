@@ -49,10 +49,10 @@ def create_app(test_config=None):
     def update_book_rating(book_id):
         retcode = 200
         body = request.get_json()
-        if ('rating' in body):
-            rating = body.get('rating')
-        else:
+        if (body is None or 'rating' not in body):
             abort(400)
+        else:
+            rating = body.get('rating')
         try:
             book = Book.query.get(book_id)
             if (book == None):
@@ -115,7 +115,7 @@ def create_app(test_config=None):
         })
 
     @app.errorhandler(400)
-    def handle_bad_request():
+    def handle_bad_request(err):
         return jsonify({
             'success': False,
             'error': 400,
@@ -123,7 +123,7 @@ def create_app(test_config=None):
         }), 400
 
     @app.errorhandler(404)
-    def handle_not_found():
+    def handle_not_found(err):
         return jsonify({
             'success': False,
             'error': 404,
@@ -131,7 +131,7 @@ def create_app(test_config=None):
         }), 404
 
     @app.errorhandler(405)
-    def handle_method_not_allowed():
+    def handle_method_not_allowed(err):
         return jsonify({
             'success': False,
             'error': 405,
