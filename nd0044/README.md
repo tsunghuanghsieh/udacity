@@ -4,7 +4,7 @@ For this class, you will need Python 3.x and [Postgres](https://formulae.brew.sh
 
 ## SQL and Data Modeling for the Web
 
-### [FYYUR](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/01_fyyur)
+### Project [FYYUR](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/01_fyyur)
 For this project, The highest version of python 3 is 3.6, I didn't find out about the lowest working version. You can use the following commands to create and activate environment `fyyur`.
 
 ```
@@ -17,6 +17,7 @@ In the Python 3.6 environment created earlier, from `01_fyyur` folder, run `pip 
 Once the development environment is set up, run `./runapp.sh app.py` and launch http://localhost:5000 in the browser to start the `Flask` app.
 
 ## API Development and Documentation
-For this section, you will need Python 3.7. You can run `source ./source02.sh` to set up your development environment and `source ./teardown02.sh` to tear down.
-### [Plants](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/plants)
-### [Bookshelf](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/bookshelf)
+For this section, you will need Python 3.7. You can run `source ./source02.sh` to set up your Python development environment and `source ./teardown02.sh` to tear down.
+### Exercise [Plants](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/plants)
+### Exercise [Bookshelf](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/bookshelf)
+### Project [Trivia](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/02_trivia_api)
