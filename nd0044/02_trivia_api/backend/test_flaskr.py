@@ -35,7 +35,11 @@ class TriviaTestCase(unittest.TestCase):
     """
     def test_delete_existing_question(self):
         """Test DELETE Existing Question"""
-        question_id = 6
+        # set up
+        question = Question("Question 1", "Answer 1", 1, 1)
+        question.insert()
+
+        question_id = question.id
         endpoint = "/questions/{}".format(question_id)
         response = self.client().delete(endpoint)
         data = json.loads(response.data)
