@@ -31,7 +31,7 @@ def create_app(test_config=None):
     #    "5": "Entertainment",
     #    "6": "Sports"
     #  }
-    categories = Category.query.order_by('type').all()
+    categories = Category.query.all()
     categories_list = { category.id: category.type for category in categories }
 
     return jsonify({
