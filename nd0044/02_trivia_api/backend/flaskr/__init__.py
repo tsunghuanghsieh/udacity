@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
+import sqlalchemy
 from flask_cors import CORS
 import random
 
@@ -71,22 +72,28 @@ def create_app(test_config=None):
     except FileNotFoundError as e:
       abort(404)
 
-  '''
-  @TODO:
-  Create an endpoint to POST a new question,
-  which will require the question and answer text,
-  category, and difficulty score.
-
-  TEST: When you submit a question on the "Add" tab,
-  the form will clear and the question will appear at the end of the last page
-  of the questions list in the "List" tab.
-  '''
   @app.route("/questions", methods = [ "POST" ])
-  def add_question():
+  def add_or_search_question():
     body = request.get_json()
-    if (body is None):
+    if (body is None or
+        # Not search nor add new question
+        ("searchTerm" not in body and
+         "question" not in body and
+         "answer" not in body and
+         "category" not in body and
+         "difficulty" not in body) or
+        # Both search and add new question
+        ("searchTerm" in body and ("question" in body or "answer" in body or "category" in body or "difficulty" in body))
+       ):
       abort(400)
-    try:
+    if ("searchTerm" in body):
+      questions = Question.query.filter(Question.question.ilike("%{}%".format(body.get('searchTerm')))).all()
+      formatted_questions = [ question.format() for question in questions ]
+      return jsonify({
+        "success": True,
+        "questions": formatted_questions,
+      })
+    else:
       question = Question(
         body.get('question'),
         body.get('answer'),
@@ -97,28 +104,7 @@ def create_app(test_config=None):
         "success": True,
         "created": question.id
       })
-    except:
-      print('except')
 
-  '''
-  @TODO:
-  Create a POST endpoint to get questions based on a search term.
-  It should return any questions for whom the search term
-  is a substring of the question.
-
-  TEST: Search by any phrase. The questions list will update to include
-  only question that include that string within their question.
-  Try using the word "title" to start.
-  '''
-
-  '''
-  @TODO:
-  Create a GET endpoint to get questions based on category.
-
-  TEST: In the "List" tab / main screen, clicking on one of the
-  categories in the left column will cause only questions of that
-  category to be shown.
-  '''
   @app.route("/categories/<int:cat_id>/questions")
   def get_questions_by_category(cat_id):
     questions = Question.query.filter(Question.category == cat_id).all()
@@ -129,17 +115,26 @@ def create_app(test_config=None):
       "currentCategory": cat_id
     })
 
-  '''
-  @TODO:
-  Create a POST endpoint to get questions to play the quiz.
-  This endpoint should take category and previous question parameters
-  and return a random questions within the given category,
-  if provided, and that is not one of the previous questions.
-
-  TEST: In the "Play" tab, after a user selects "All" or a category,
-  one question at a time is displayed, the user is allowed to answer
-  and shown whether they were correct or not.
-  '''
+  @app.route("/quizzes", methods = [ "POST" ])
+  def play_quiz():
+    body = request.get_json()
+    if (body is None):
+      abort(400)
+    previous_questions = body.get("previous_questions")
+    quiz_category = body.get("quiz_category")
+    if (quiz_category['id'] == 0):
+      filter_string = Question.id.notin_(previous_questions)
+    else:
+      filter_string = sqlalchemy.and_(
+                        Question.category == quiz_category['id'],
+                        Question.id.notin_(previous_questions))
+    questions = Question.query.filter(filter_string).all()
+    question = random.choice(questions).format() if (len(questions) > 0) else None
+    return jsonify({
+      "success": True,
+      "previous_questions": previous_questions,
+      "question": question
+    })
 
   @app.errorhandler(400)
   def handle_bad_request(err):
