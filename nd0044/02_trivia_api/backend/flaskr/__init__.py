@@ -53,8 +53,7 @@ def create_app(test_config=None):
       "success": True,
       "questions": questions_array[start:start + QUESTIONS_PER_PAGE],
       "total_questions": len(questions_array),
-      "categories": categories_list,
-      "currentCategory": 3 # TODO Change mes
+      "categories": categories_list
     })
 
   @app.route('/questions/<int:question_id>', methods = [ "DELETE" ])
@@ -87,13 +86,16 @@ def create_app(test_config=None):
        ):
       abort(400)
     if ("searchTerm" in body):
+      # Search
       questions = Question.query.filter(Question.question.ilike("%{}%".format(body.get('searchTerm')))).all()
       formatted_questions = [ question.format() for question in questions ]
       return jsonify({
         "success": True,
         "questions": formatted_questions,
+        "totalQuestions": len(formatted_questions)
       })
     else:
+      # Add new question
       question = Question(
         body.get('question'),
         body.get('answer'),
@@ -112,6 +114,7 @@ def create_app(test_config=None):
     return jsonify({
       "success": True,
       "questions": formatted_questions,
+      "totalQuestions": len(formatted_questions),
       "currentCategory": cat_id
     })
 
@@ -167,6 +170,14 @@ def create_app(test_config=None):
       "error": 422,
       "message": "Unprocessable Entity"
     }), 422
+
+  @app.errorhandler(500)
+  def handle_internal_server_error(err):
+    return jsonify({
+      "success": False,
+      "error": 500,
+      "message": "Internal Server Error"
+    }), 500
 
   return app
 
