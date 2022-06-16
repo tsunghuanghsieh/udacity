@@ -96,8 +96,6 @@ def create_app(test_config=None):
         if ('search' in body):
             search = body.get('search')
             books = Book.query.filter(Book.title.ilike("%{}%".format(search))).all()
-            print("search " + search)
-            print(len(books))
             return jsonify({
                 'success': True,
                 'total_books': len(books)
