@@ -92,7 +92,7 @@ def create_app(test_config=None):
       return jsonify({
         "success": True,
         "questions": formatted_questions,
-        "totalQuestions": len(formatted_questions)
+        "total_questions": len(formatted_questions)
       })
     else:
       # Add new question
@@ -114,8 +114,8 @@ def create_app(test_config=None):
     return jsonify({
       "success": True,
       "questions": formatted_questions,
-      "totalQuestions": len(formatted_questions),
-      "currentCategory": cat_id
+      "total_questions": len(formatted_questions),
+      "current_category": cat_id
     })
 
   @app.route("/quizzes", methods = [ "POST" ])

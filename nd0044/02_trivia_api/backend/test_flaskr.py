@@ -130,7 +130,7 @@ class TriviaTestCase(unittest.TestCase):
         data = json.loads(response.data)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(data['success'])
-        self.assertEqual(data['currentCategory'], cat_id)
+        self.assertEqual(data['current_category'], cat_id)
 
     def test_play_quiz(self):
         """Test POST Play Quiz"""
