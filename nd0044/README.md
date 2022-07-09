@@ -20,8 +20,13 @@ Once the development environment is set up, run `./runapp.sh app.py` and launch 
 For this section, you will need Python 3.7. You can run `source ./source02.sh` to set up your Python development environment and `source ./teardown02.sh` to tear down.
 
 ### Exercise [Plants](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/plants)
+From exercise folder, run `./setup.sh` to populate databases and `./teardown.sh` to remove databases. Also from project folder, run `./runflask.sh` to start the Flask app.
+
 ### Exercise [Bookshelf](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/bookshelf)
+[README.md](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/bookshelf/README.md)
+
 ### Project [Trivia](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/02_trivia_api)
+From project folder, run `./setup.sh` to populate databases and `./teardown.sh` to remove databases. Also from project folder, run `./runflask.sh` to start the Flask app. From [frontend](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/02_trivia_api/frontend) folder in another terminal, run `npm install` once to install dependencies and followed by `npm start` to start the React app.
 
 ## Identity and Access Management
 For this section, you will need Python 3.7. You can run `source ./source03.sh` to set up your Python development environment and `source ./teardown03.sh` to tear down. Database used is SQLite and the database file is in [database folder](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/03_coffee_shop_full_stack/backend/src/database). To connect to the database, run `sqlite3 [relative_path_to]/database.db`.
