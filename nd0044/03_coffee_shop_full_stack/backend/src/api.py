@@ -12,7 +12,7 @@ setup_db(app)
 CORS(app)
 
 '''
-@TODO uncomment the following line to initialize the datbase
+!! Uncomment the following line to initialize the datbase
 !! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 !! Running this function will add one
@@ -21,7 +21,6 @@ db_drop_and_create_all()
 
 # ROUTES
 @app.route("/drinks")
-# @requires_auth('get:drinks')
 def get_drinks():
     drinks = Drink.query.all()
     drinks = [ drink.short() for drink in drinks ]
@@ -55,7 +54,6 @@ def create_drink(token):
         "drinks": [ drink.long() ]
     })
 
-
 @app.route("/drinks/<int:drink_id>", methods = ["PATCH"])
 @requires_auth('patch:drinks')
 def update_drink(token, drink_id):
@@ -73,7 +71,6 @@ def update_drink(token, drink_id):
         "drinks": [ drink.long() ]
     })
 
-
 @app.route("/drinks/<int:drink_id>", methods = ["DELETE"])
 @requires_auth('delete:drinks')
 def delete_drink(token, drink_id):
@@ -89,11 +86,7 @@ def delete_drink(token, drink_id):
     except FileNotFoundError as e:
         abort(404)
 
-
 # Error Handling
-'''
-Example error handling for unprocessable entity
-'''
 @app.errorhandler(400)
 def handle_bad_request(error):
     return jsonify({
