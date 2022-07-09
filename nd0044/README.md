@@ -21,3 +21,8 @@ For this section, you will need Python 3.7. You can run `source ./source02.sh` t
 ### Exercise [Plants](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/plants)
 ### Exercise [Bookshelf](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/bookshelf)
 ### Project [Trivia](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/02_trivia_api)
+
+## Identity and Access Management
+For this section, you will need Python 3.7. You can run `source ./source03.sh` to set up your Python development environment and `source ./teardown03.sh` to tear down.
+
+### Project [Coffee Shop Full Stack](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/03_coffee_shop_full_stack)
