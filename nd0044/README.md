@@ -1,6 +1,6 @@
 # [Full Stack Web Developer Nanodegree (nd0044 v2)](https://github.com/udacity/FSND)
 
-For this class, you will need Python 3.x and [Postgres](https://formulae.brew.sh/formula/postgresql). The postgres version used is 14.2. Instead of `virtualenv`, I use [Anaconda](https://www.anaconda.com/products/distribution) to manage separate Python environments.
+For this class, you will need Python 3.x and [Postgres](https://formulae.brew.sh/formula/postgresql). The postgres version used is 14.2, unless otherwise stated. Instead of `virtualenv`, I use [Anaconda](https://www.anaconda.com/products/distribution) to manage separate Python environments.
 
 ## SQL and Data Modeling for the Web
 
@@ -18,11 +18,12 @@ Once the development environment is set up, run `./runapp.sh app.py` and launch 
 
 ## API Development and Documentation
 For this section, you will need Python 3.7. You can run `source ./source02.sh` to set up your Python development environment and `source ./teardown02.sh` to tear down.
+
 ### Exercise [Plants](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/plants)
 ### Exercise [Bookshelf](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/bookshelf)
 ### Project [Trivia](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/02_trivia_api)
 
 ## Identity and Access Management
-For this section, you will need Python 3.7. You can run `source ./source03.sh` to set up your Python development environment and `source ./teardown03.sh` to tear down.
+For this section, you will need Python 3.7. You can run `source ./source03.sh` to set up your Python development environment and `source ./teardown03.sh` to tear down. Database used is SQLite and the database file is in [database folder](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/03_coffee_shop_full_stack/backend/src/database)
 
 ### Project [Coffee Shop Full Stack](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/03_coffee_shop_full_stack)
