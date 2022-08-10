@@ -32,3 +32,11 @@ From project folder, run `./setup.sh` to populate databases and `./teardown.sh` 
 For this section, you will need Python 3.7. You can run `source ./source03.sh` to set up your Python development environment and `source ./teardown03.sh` to tear down. Database used is SQLite and the database file is in [database folder](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/03_coffee_shop_full_stack/backend/src/database). To connect to the database, run `sqlite3 [relative_path_to]/database.db`.
 
 ### Project [Coffee Shop Full Stack](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/03_coffee_shop_full_stack)
+
+## Server Deployment, Containerization and Testing
+Install the latest [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+
+For this section, you will need Python 3.7. You can run `source ./source04.sh` to set up your Python development environment and `source ./teardown04.sh` to tear down.
+
+### Project [Server Deployment and Containerization](https://github.com/tsunghuanghsieh/cd0157-Server-Deployment-and-Containerization)
+From project folder, run `./setup_1_ekscluster.sh`, `./setup_2_cloudformation_stack.sh` and `./setup_3_iamrole.sh` to create EKS Cluster, CloudFormation stack, as well as role and policy on AWS. It will push a containerized Flask app to EKS. To find out external facing URI, run `kubectl get services simple-jwt-api -o wide`. Subsequent commits to the project will automatically trigger a build and push to EKS. Remember to run `./teardown_cloudformation_stack.sh` and `./teardown_ekscluster.sh` when done. AWS resources costs money.
