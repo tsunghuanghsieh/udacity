@@ -1,0 +1,4 @@
+DROP DATABASE IF EXISTS casting;
+DROP DATABASE IF EXISTS casting_test;
+CREATE DATABASE casting;
+CREATE DATABASE casting_test;

@@ -1,0 +1,30 @@
+CREATE SEQUENCE actors_id_seq;
+
+Create Table IF NOT Exists actors (
+    id INTEGER NOT NULL DEFAULT nextval('actors_id_seq'),
+    name VARCHAR NOT NULL,
+    age INTEGER,
+    gender VARCHAR
+);
+
+ALTER SEQUENCE actors_id_seq OWNED BY actors.id;
+
+CREATE SEQUENCE movies_id_seq;
+
+Create Table IF NOT Exists movies (
+    id INTEGER NOT NULL DEFAULT nextval('movies_id_seq'),
+    title VARCHAR NOT NULL,
+    release_date VARCHAR
+);
+
+ALTER SEQUENCE movies_id_seq OWNED BY movies.id;
+
+CREATE SEQUENCE auditions_id_seq;
+
+Create Table IF NOT Exists auditions (
+    id INTEGER NOT NULL DEFAULT nextval('auditions_id_seq'),
+    actor_id INTEGER NOT NULL,
+    movie_id INTEGER NOT NULL
+);
+
+ALTER SEQUENCE auditions_id_seq OWNED BY auditions.id;
