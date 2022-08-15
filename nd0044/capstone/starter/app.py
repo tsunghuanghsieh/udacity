@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
 from models import setup_db, Actor, Movie, Audition
+from auth.auth import AuthError, requires_auth
 import app_utils
 
 def create_app(test_config=None):
@@ -20,7 +21,8 @@ def create_app(test_config=None):
     return response
 
   @app.route("/actors")
-  def get_actors():
+  @requires_auth('get:actors')
+  def get_actors(token):
     actors = Actor.query.all()
     all_actors = [ actor.name for actor in actors ]
 
@@ -30,7 +32,8 @@ def create_app(test_config=None):
     })
 
   @app.route("/actors/<int:actor_id>")
-  def get_actor(actor_id):
+  @requires_auth('get:actors')
+  def get_actor(token, actor_id):
     actor = Actor.query.get(actor_id)
 
     return jsonify({
@@ -39,7 +42,8 @@ def create_app(test_config=None):
     })
 
   @app.route("/movies")
-  def get_movies():
+  @requires_auth('get:movies')
+  def get_movies(token):
     movies = Movie.query.all()
     all_movies = [ movie.title for movie in movies ]
 
@@ -49,7 +53,8 @@ def create_app(test_config=None):
     })
 
   @app.route("/movies/<int:movie_id>")
-  def get_movie(movie_id):
+  @requires_auth('get:movies')
+  def get_movie(token, movie_id):
     movie = Movie.query.get(movie_id)
 
     return jsonify({
@@ -58,7 +63,8 @@ def create_app(test_config=None):
     })
 
   @app.route("/auditions")
-  def get_auditions():
+  @requires_auth('get:auditions')
+  def get_auditions(token):
     auditions = Audition.query.all()
     all_auditions = [ audition.format() for audition in auditions ]
 
@@ -68,7 +74,8 @@ def create_app(test_config=None):
     })
 
   @app.route("/auditions/<int:audition_id>")
-  def get_audition(audition_id):
+  @requires_auth('get:auditions')
+  def get_audition(token, audition_id):
     audition = Audition.query.get(audition_id)
 
     return jsonify({
@@ -77,7 +84,8 @@ def create_app(test_config=None):
     })
 
   @app.route("/actors", methods = [ "POST" ])
-  def create_actor():
+  @requires_auth('post:actors')
+  def create_actor(token):
     data = app_utils.parseRequestJson("actor", request.get_json())
     if (data['status_code'] != 200):
       abort(data['status_code'])
@@ -89,7 +97,8 @@ def create_app(test_config=None):
     })
 
   @app.route("/movies", methods = [ "POST" ])
-  def create_movie():
+  @requires_auth('post:movies')
+  def create_movie(token):
     data = app_utils.parseRequestJson("movie", request.get_json())
     if (data['status_code'] != 200):
       abort(data['status_code'])
@@ -101,7 +110,8 @@ def create_app(test_config=None):
     })
 
   @app.route("/actors/<int:actor_id>", methods = [ "PATCH" ])
-  def update_actor(actor_id):
+  @requires_auth('patch:actors')
+  def update_actor(token, actor_id):
     data = app_utils.parseRequestJson("actor", request.get_json())
     if (data['status_code'] != 200):
       abort(data['status_code'])
@@ -113,7 +123,8 @@ def create_app(test_config=None):
     })
 
   @app.route("/movies/<int:movie_id>", methods = [ "PATCH" ])
-  def update_movie(movie_id):
+  @requires_auth('patch:movies')
+  def update_movie(token, movie_id):
     data = app_utils.parseRequestJson("movie", request.get_json())
     print(data)
     if (data['status_code'] != 200):
@@ -126,7 +137,8 @@ def create_app(test_config=None):
     })
 
   @app.route("/actors/<int:actor_id>", methods = [ "DELETE" ])
-  def delete_actor(actor_id):
+  @requires_auth('delete:actors')
+  def delete_actor(token, actor_id):
     try:
       actor = Actor.query.get(actor_id)
       if (actor is None):
@@ -140,7 +152,8 @@ def create_app(test_config=None):
       abort(404)
 
   @app.route("/movies/<int:movie_id>", methods = [ "DELETE" ])
-  def delete_movie(movie_id):
+  @requires_auth('delete:movies')
+  def delete_movie(token, movie_id):
     try:
       movie = Movie.query.get(movie_id)
       if (movie is None):
@@ -155,7 +168,8 @@ def create_app(test_config=None):
       abort(404)
 
   @app.route("/audition/<int:audition_id>", methods = [ "DELETE" ])
-  def delete_audition(audition_id):
+  @requires_auth('delete:auditions')
+  def delete_audition(token, audition_id):
     try:
       audition = Audition.query.get(audition_id)
       if (audition is None):
