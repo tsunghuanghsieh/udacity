@@ -130,26 +130,35 @@ def create_app(test_config=None):
     data = app_utils.parseRequestJson("actor", request.get_json())
     if (data['status_code'] != 200):
       abort(data['status_code'])
-    actor = Actor.query.get(actor_id)
-    actor.update(data)
-    return jsonify({
-      "success": True,
-      "updated": actor_id
-    })
+    try:
+      actor = Actor.query.get(actor_id)
+      if (actor is None):
+        raise FileNotFoundError()
+      actor.update(data)
+      return jsonify({
+        "success": True,
+        "updated": actor_id
+      })
+    except FileNotFoundError as e:
+      abort(404)
 
   @app.route("/movies/<int:movie_id>", methods = [ "PATCH" ])
   @requires_auth('patch:movies')
   def update_movie(token, movie_id):
     data = app_utils.parseRequestJson("movie", request.get_json())
-    print(data)
     if (data['status_code'] != 200):
       abort(data['status_code'])
     movie = Movie.query.get(movie_id)
-    movie.update(data)
-    return jsonify({
-      "success": True,
-      "updated": movie_id
-    })
+    try:
+      if (movie is None):
+        raise FileNotFoundError()
+      movie.update(data)
+      return jsonify({
+        "success": True,
+        "updated": movie_id
+      })
+    except FileNotFoundError as e:
+      abort(404)
 
   @app.route("/actors/<int:actor_id>", methods = [ "DELETE" ])
   @requires_auth('delete:actors')
