@@ -34,12 +34,17 @@ def create_app(test_config=None):
   @app.route("/actors/<int:actor_id>")
   @requires_auth('get:actors')
   def get_actor(token, actor_id):
-    actor = Actor.query.get(actor_id)
+    try:
+      actor = Actor.query.get(actor_id)
+      if (actor is None):
+        raise FileNotFoundError()
 
-    return jsonify({
-      "success": True,
-      "actors_detail": actor.format()
-    })
+      return jsonify({
+        "success": True,
+        "actors_detail": actor.format()
+      })
+    except FileNotFoundError as e:
+      abort(404)
 
   @app.route("/movies")
   @requires_auth('get:movies')
@@ -55,12 +60,17 @@ def create_app(test_config=None):
   @app.route("/movies/<int:movie_id>")
   @requires_auth('get:movies')
   def get_movie(token, movie_id):
-    movie = Movie.query.get(movie_id)
+    try:
+      movie = Movie.query.get(movie_id)
+      if (movie is None):
+        raise FileNotFoundError()
 
-    return jsonify({
-      "success": True,
-      "movies_detail": movie.format()
-    })
+      return jsonify({
+        "success": True,
+        "movies_detail": movie.format()
+      })
+    except FileNotFoundError as e:
+      abort(404)
 
   @app.route("/auditions")
   @requires_auth('get:auditions')
@@ -76,12 +86,17 @@ def create_app(test_config=None):
   @app.route("/auditions/<int:audition_id>")
   @requires_auth('get:auditions')
   def get_audition(token, audition_id):
-    audition = Audition.query.get(audition_id)
+    try:
+      audition = Audition.query.get(audition_id)
+      if (audition is None):
+        raise FileNotFoundError()
 
-    return jsonify({
-      "success": True,
-      "auditions_detail": audition.format()
-    })
+      return jsonify({
+        "success": True,
+        "auditions_detail": audition.format()
+      })
+    except FileNotFoundError as e:
+      abort(404)
 
   @app.route("/actors", methods = [ "POST" ])
   @requires_auth('post:actors')
