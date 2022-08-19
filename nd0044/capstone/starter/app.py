@@ -124,6 +124,19 @@ def create_app(test_config=None):
       "movie": movie.id
     })
 
+  @app.route("/auditions", methods = [ "POST" ])
+  @requires_auth('post:auditions')
+  def create_audition(token):
+    data = app_utils.parseRequestJson("audition", request.get_json())
+    if (data['status_code'] != 200):
+      abort(data['status_code'])
+    audition = Audition(data)
+    audition.insert()
+    return jsonify({
+      "success": True,
+      "movie": audition.id
+    })
+
   @app.route("/actors/<int:actor_id>", methods = [ "PATCH" ])
   @requires_auth('patch:actors')
   def update_actor(token, actor_id):
