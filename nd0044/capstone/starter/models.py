@@ -31,9 +31,9 @@ class Actor(db.Model):
   gender = Column(String(20))
 
   # relationship.backref is a shortcut for 2 relationship.back_populates in both classes,
-  # in this case, Venue and Show class.
+  # in this case, Actor and Audition class.
   # https://docs.sqlalchemy.org/en/14/orm/backref.html#relationships-backref
-  shows = db.relationship('Audition', backref="actors", lazy=True)
+  auditions = db.relationship('Audition', backref="actors", lazy=True, cascade="all, delete-orphan")
 
   def __init__(self, data):
     self.name = data['name']
@@ -70,9 +70,9 @@ class Movie(db.Model):
   release_date = Column(String(20))
 
   # relationship.backref is a shortcut for 2 relationship.back_populates in both classes,
-  # in this case, Venue and Show class.
+  # in this case, Movie and Audition class.
   # https://docs.sqlalchemy.org/en/14/orm/backref.html#relationships-backref
-  shows = db.relationship('Audition', backref="movies", lazy=True)
+  auditions = db.relationship('Audition', backref="movies", lazy=True, cascade="all, delete-orphan")
 
   def __init__(self, data):
     self.title = data['title']
