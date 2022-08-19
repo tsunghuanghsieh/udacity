@@ -3,9 +3,9 @@ from sqlalchemy import Column, ForeignKey, Integer, String, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
 
-database_path = os.environ['DATABASE_URL']
-if database_path is "":
-  database_path = 'postgresql://zonghuan@localhost:5432/casting'
+from env import getDbPath
+
+database_path = getDbPath()
 if database_path.startswith("postgres://"):
   database_path = database_path.replace("postgres://", "postgresql://", 1)
 
