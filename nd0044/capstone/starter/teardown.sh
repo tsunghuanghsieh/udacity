@@ -9,7 +9,7 @@ else
    IS_POSTGRES_RUNNING=true
 fi
 
-psql -d postgres -f "`dirname $0`teardown_delete_db.sql"
+psql -d postgres -f "`dirname $0`/teardown_delete_db.psql"
 
 # stop postgres server if we start it
 if expr $IS_POSTGRES_RUNNING = false > /dev/null; then
