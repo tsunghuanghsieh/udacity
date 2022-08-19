@@ -228,6 +228,22 @@ def create_app(test_config=None):
       "message": "Bad Request"
     }), 400
 
+  @app.errorhandler(401)
+  def handle_bad_request(error):
+    return jsonify({
+        "success": False,
+        "error": 401,
+        "message": "Unauthorized"
+    }), 401
+
+  @app.errorhandler(403)
+  def handle_method_not_allowed(error):
+    return jsonify({
+        "success": False,
+        "error": 403,
+        "message": "Forbidden"
+    }), 403
+
   @app.errorhandler(404)
   def handle_not_found(err):
     return jsonify({
