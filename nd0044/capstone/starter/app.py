@@ -191,7 +191,7 @@ def create_app(test_config=None):
     except FileNotFoundError as e:
       abort(404)
 
-  @app.route("/audition/<int:audition_id>", methods = [ "DELETE" ])
+  @app.route("/auditions/<int:audition_id>", methods = [ "DELETE" ])
   @requires_auth('delete:auditions')
   def delete_audition(token, audition_id):
     try:
