@@ -24,12 +24,12 @@ class AuthError(Exception):
 def get_token_auth_header():
     auth_header = request.headers.get("Authorization", None)
     if auth_header is None:
-        raise AuthError("Bad Request: Missing Authorization", 401)
+        raise AuthError("Unauthorized: Missing Authorization Token", 401)
     auth_header_parts = auth_header.split(" ")
     if (len(auth_header_parts) != 2):
-        raise AuthError("Bad Request: Malformed Authorization", 400)
+        raise AuthError("Bad Request: Malformed Authorization Token", 400)
     if (auth_header_parts[0].lower() != "bearer"):
-        raise AuthError("Bad Request: Not Bearer", 400)
+        raise AuthError("Bad Request: No Bearer", 400)
 
     return auth_header_parts[1]
 
@@ -37,7 +37,7 @@ def check_permissions(permission, payload):
     if ("permissions" not in payload):
         raise AuthError("Bad Request: Permission Not In JWT", 400)
     if (permission not in payload["permissions"]):
-        raise AuthError("Forbidden: Unauthorized", 403)
+        raise AuthError("Forbidden: No Required Permission", 403)
 
     return True
 
@@ -47,7 +47,7 @@ def verify_decode_jwt(token):
     unverified_header = jwt.get_unverified_header(token)
     rsa_key = {}
     if "kid" not in unverified_header:
-        raise AuthError(": Unauthorized", 401)
+        raise AuthError("Unauthorized: Unauthorized", 401)
 
     for key in jwks["keys"]:
         if key["kid"] == unverified_header["kid"]:
