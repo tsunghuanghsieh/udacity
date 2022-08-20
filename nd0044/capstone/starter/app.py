@@ -133,7 +133,7 @@ def create_app(test_config=None):
     audition.insert()
     return jsonify({
       "success": True,
-      "movie": audition.id
+      "audition": audition.id
     })
 
   @app.route("/actors/<int:actor_id>", methods = [ "PATCH" ])
