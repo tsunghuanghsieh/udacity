@@ -172,6 +172,26 @@ def create_app(test_config=None):
     except FileNotFoundError as e:
       abort(404)
 
+  @app.route("/auditions/<int:audition_id>", methods = [ "PATCH" ])
+  @requires_auth('patch:auditions')
+  def update_audition(token, audition_id):
+    data = app_utils.parseRequestJson("audition", request.get_json())
+    if (data['status_code'] != 200):
+      abort(data['status_code'])
+    audition = Audition.query.get(audition_id)
+    actor = Actor.query.get(data['actor_id'])
+    movie = Movie.query.get(data['movie_id'])
+    try:
+      if (audition is None or actor is None or movie is None):
+        raise FileNotFoundError()
+      audition.update(data)
+      return jsonify({
+        "success": True,
+        "updated": audition_id
+      })
+    except FileNotFoundError as e:
+      abort(404)
+
   @app.route("/actors/<int:actor_id>", methods = [ "DELETE" ])
   @requires_auth('delete:actors')
   def delete_actor(token, actor_id):
