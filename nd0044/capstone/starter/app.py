@@ -129,6 +129,10 @@ def create_app(test_config=None):
     data = app_utils.parseRequestJson("audition", request.get_json())
     if (data['status_code'] != 200):
       abort(data['status_code'])
+    actor = Actor.query.get(data['actor_id'])
+    movie = Movie.query.get(data['movie_id'])
+    if (actor is None or movie is None):
+      raise FileNotFoundError()
     audition = Audition(data)
     audition.insert()
     return jsonify({
