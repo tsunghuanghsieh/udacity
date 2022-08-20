@@ -10,5 +10,4 @@ elif (platform == "darwin"):
     database_path = 'postgresql://zonghuan@localhost:5432/casting'
 
 def getDbPath():
-    print(database_path)
     return database_path
