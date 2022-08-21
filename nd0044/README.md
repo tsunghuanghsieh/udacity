@@ -1,6 +1,6 @@
 # [Full Stack Web Developer Nanodegree (nd0044 v2)](https://github.com/udacity/FSND)
 
-For this class, you will need Python 3.x and [Postgres](https://formulae.brew.sh/formula/postgresql). The postgres version used is 14.2, unless otherwise stated. Instead of `virtualenv`, I use [Anaconda](https://www.anaconda.com/products/distribution) to manage separate Python environments.
+For this class, you will need Python 3.x and [Postgres](https://formulae.brew.sh/formula/postgresql), unless otherwise specified. The postgres version used is 14.2, unless otherwise stated. Instead of `virtualenv`, I use [Anaconda](https://www.anaconda.com/products/distribution) to manage separate Python environments.
 
 ## SQL and Data Modeling for the Web
 
@@ -40,3 +40,8 @@ For this section, you will need Python 3.7. You can run `source ./source04.sh` t
 
 ### Project [Server Deployment and Containerization](https://github.com/tsunghuanghsieh/cd0157-Server-Deployment-and-Containerization)
 From project folder, run `./setup_1_ekscluster.sh`, `./setup_2_cloudformation_stack.sh` and `./setup_3_iamrole.sh` to create EKS Cluster, CloudFormation stack, as well as role and policy on AWS. It will push a containerized Flask app to EKS. To find out external facing URI, run `kubectl get services simple-jwt-api -o wide`. Subsequent commits to the project will automatically trigger a build and push to EKS. Remember to run `./teardown_cloudformation_stack.sh` and `./teardown_ekscluster.sh` when done. AWS resources costs money.
+
+## Capstone Proect
+
+### Project [Casting Agency](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/capstone)
+For this section, you will need Python 3.7. You can run `source ./source05.sh` to set up your Python development environment and `source ./teardown05.sh` to tear down. For additional project specific setup, please refer to [README.md](https://github.com/tsunghuanghsieh/udacity/blob/main/nd0044/capstone/starter/README.md).

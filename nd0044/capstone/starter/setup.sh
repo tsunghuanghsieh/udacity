@@ -10,8 +10,8 @@ else
 fi
 
 psql -d postgres -f "`dirname $0`/setup_create_db.psql"
-# psql -d casting -f "`dirname $0`/setup_create_tbl.psql"
-# psql -d casting_test -f "`dirname $0`/setup_populate_tbl.psql"
+psql -d casting -f "`dirname $0`/setup_create_tbl.psql"
+psql -d casting -f "`dirname $0`/setup_populate_tbl.psql"
 
 # stop postgres server if we start it
 if expr $IS_POSTGRES_RUNNING = false > /dev/null; then
