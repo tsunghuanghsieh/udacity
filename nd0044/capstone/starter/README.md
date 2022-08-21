@@ -1,7 +1,7 @@
 # Capstone project Casting Agency
 
 ## Local Database Setup/Teardown
-You should have already sourced (source05.sh)[https://github.com/tsunghuanghsieh/udacity/blob/main/nd0044/source05.sh] to create a separate python environment `fsd5` in Conda.
+You should have already sourced [source05.sh](https://github.com/tsunghuanghsieh/udacity/blob/main/nd0044/source05.sh) to create a separate python environment `fsd5` in Conda.
 
 From project folder, you can either run `./setup.sh` which will execute `./setup_create_db.psql`, `./setup_create_tbl.psql` and `./setup_populate_tbd.psql` to create and populate necessary database, tables and initial data. Alternatively, you can manually execute the scripts as follows. The local database is for developement and testing.
 ```
@@ -79,6 +79,7 @@ Go to [Heroku](https://signup.heroku.com/) and create an account. [Create](https
 ## Local Run
 From the project folder, run `./runflask.sh`. The backend runs on http://127.0.0.1:5000/.
 
+### Actor Related Enpoings
 ```
 POST /actors
 GET /actors
@@ -94,7 +95,7 @@ For POST and PATCH, it requires the following JSON object in the request body.
     "gender": "Actor Gender"
 }
 ```
-
+### Movie Related Enpoings
 ```
 POST /movies
 GET /movies
@@ -109,7 +110,7 @@ For POST and PATCH, it requires the following JSON object in the request body.
     "release_date": "Release Date"
 }
 ```
-
+### Audition Related Enpoings
 ```
 POST /auditions
 GET /auditions
