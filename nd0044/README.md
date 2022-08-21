@@ -43,5 +43,5 @@ From project folder, run `./setup_1_ekscluster.sh`, `./setup_2_cloudformation_st
 
 ## Capstone Proect
 
-### Project [Casting Agency](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/capstone)
+### Project [Casting Agency](https://github.com/tsunghuanghsieh/udacity/tree/main/nd0044/capstone/starter)
 For this section, you will need Python 3.7. You can run `source ./source05.sh` to set up your Python development environment and `source ./teardown05.sh` to tear down. For additional project specific setup, please refer to [README.md](https://github.com/tsunghuanghsieh/udacity/blob/main/nd0044/capstone/starter/README.md).
