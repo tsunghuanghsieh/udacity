@@ -83,9 +83,7 @@ Go to [Heroku](https://signup.heroku.com/) and create an account. [Create](https
 From the project folder, run `./runflask.sh`. The backend runs on http://127.0.0.1:5000/.
 
 ### Actor Related Enpoings
-```
-GET /actors
-```
+#### GET /actors
 * Retrieve a dictionary of actors
 * Path Parameters: None
 * Request Payload: None
@@ -102,9 +100,8 @@ Sample response:
 }
 ```
 
-```
-GET /actors/<int:actor_id>
-```
+#### GET /actors/<int:actor_id>
+
 * Retrieve details of an actor
 * Path Parameters: actor_id (INT) actor id
 * Request Payload: None
@@ -123,9 +120,7 @@ Sample response:
 }
 ```
 
-```
-POST /actors
-```
+#### POST /actors
 * Create an actor
 * Path Parameters: None
 * Request Payload: JSON object with actor details
@@ -147,9 +142,7 @@ Sample response:
 }
 ```
 
-```
-PATCH /actors/<int:actor_id>
-```
+#### PATCH /actors/<int:actor_id>
 * Update actor details
 * Path Parameters: actor_id (INT) actor id
 * Request Payload: JSON object with actor details
@@ -171,9 +164,7 @@ Sample response:
 }
 ```
 
-```
-DELETE /actors/<int:actor_id>
-```
+#### DELETE /actors/<int:actor_id>
 * Delete actor
 * Path Parameters: actor_id (INT) actor id
 * Request Payload: None
