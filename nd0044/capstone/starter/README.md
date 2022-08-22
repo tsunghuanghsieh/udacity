@@ -179,20 +179,99 @@ Sample response:
 ```
 
 ### Movie Related Enpoings
-```
-POST /movies
-GET /movies
-GET /movies/<int:movie_id>
-DELETE /movies/<int:movie_id>
-PATCH /movies/<int:movie_id>
-```
-For POST and PATCH, it requires the following JSON object in the request body.
+#### GET /movies
+* Retrieve a dictionary of movies
+* Path Parameters: None
+* Request Payload: None
+* Response Payload: JSON object with a dictionary of movie titles and request status.
+
+Sample response:
 ```
 {
-    "title": "Movie Title",
-    "release_date": "Release Date"
+    "movies": [
+        "Fast & Furious",
+        "2 Fast 2 Furious",
+        "Fast Five"
+    ],
+    "success": true
 }
 ```
+
+#### GET /movies/<int:movie_id>
+
+* Retrieve details of an movie
+* Path Parameters: movie_id (INT) movie id
+* Request Payload: None
+* Response Payload: JSON object with movie details and request status.
+
+Sample response:
+```
+{
+    "movies_detail": {
+        "id": 3,
+        "release_date": "April 29, 2011",
+        "title": "Fast Five"
+    },
+    "success": true
+}
+```
+
+#### POST /movies
+* Create an movie
+* Path Parameters: None
+* Request Payload: JSON object with movie details
+* Response Payload: JSON object with movie id and request status.
+
+Sample request payload:
+```
+{
+    "title": "Fast Five",
+    "release_date": "April 29, 2011"
+}
+```
+Sample response:
+```
+{
+    "movie": 3,
+    "success": true
+}
+```
+
+#### PATCH /movies/<int:movie_id>
+* Update movie details
+* Path Parameters: movie_id (INT) movie id
+* Request Payload: JSON object with movie details
+* Response Payload: JSON object with movie id and request status.
+
+Sample request payload:
+```
+{
+    "title": "Fast Five",
+    "release_date": "April 29, 2011"
+}
+```
+Sample response:
+```
+{
+    "success": true,
+    "updated": 3
+}
+```
+
+#### DELETE /movies/<int:movie_id>
+* Delete movie
+* Path Parameters: movie_id (INT) movie id
+* Request Payload: None
+* Response Payload: JSON object with movie id and request status.
+
+Sample response:
+```
+{
+    "deleted": 2,
+    "success": true
+}
+```
+
 ### Audition Related Enpoings
 ```
 POST /auditions
