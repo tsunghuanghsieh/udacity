@@ -84,20 +84,109 @@ From the project folder, run `./runflask.sh`. The backend runs on http://127.0.0
 
 ### Actor Related Enpoings
 ```
-POST /actors
 GET /actors
-GET /actors/<int:actor_id>
-DELETE /actors/<int:actor_id>
-PATCH /actors/<int:actor_id>
 ```
-For POST and PATCH, it requires the following JSON object in the request body.
+* Retrieve a dictionary of actors
+* Path Parameters: None
+* Request Payload: None
+* Response Payload: JSON object with a dictionary of actors' name and request status.
+
+Sample response:
 ```
 {
-    "name": "Actor Name",
-    "age" : actor_age,
-    "gender": "Actor Gender"
+    "actors": [
+        "Vin D",
+        "Tom Cruise"
+    ],
+    "success": true
 }
 ```
+
+```
+GET /actors/<int:actor_id>
+```
+* Retrieve details of an actor
+* Path Parameters: actor_id (INT) actor id
+* Request Payload: None
+* Response Payload: JSON object with actor details and request status.
+
+Sample response:
+```
+{
+    "actors_detail": {
+        "age": 40,
+        "gender": "M",
+        "id": 2,
+        "name": "Paul Walker"
+    },
+    "success": true
+}
+```
+
+```
+POST /actors
+```
+* Create an actor
+* Path Parameters: None
+* Request Payload: JSON object with actor details
+* Response Payload: JSON object with actor id and request status.
+
+Sample request payload:
+```
+{
+    "age": 40,
+    "gender": "M",
+    "name": "Paul Walker"
+}
+```
+Sample response:
+```
+{
+    "actor": 2,
+    "success": true
+}
+```
+
+```
+PATCH /actors/<int:actor_id>
+```
+* Update actor details
+* Path Parameters: actor_id (INT) actor id
+* Request Payload: JSON object with actor details
+* Response Payload: JSON object with actor id and request status.
+
+Sample request payload:
+```
+{
+    "age": 40,
+    "gender": "M",
+    "name": "Paul Walker"
+}
+```
+Sample response:
+```
+{
+    "success": true,
+    "updated": 2
+}
+```
+
+```
+DELETE /actors/<int:actor_id>
+```
+* Delete actor
+* Path Parameters: actor_id (INT) actor id
+* Request Payload: None
+* Response Payload: JSON object with actor id and request status.
+
+Sample response:
+```
+{
+    "deleted": 2,
+    "success": true
+}
+```
+
 ### Movie Related Enpoings
 ```
 POST /movies
