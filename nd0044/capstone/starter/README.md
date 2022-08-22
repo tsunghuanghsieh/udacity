@@ -85,24 +85,24 @@ From the project folder, run `./runflask.sh`. The backend runs on http://127.0.0
 ## RBAC
 Users in Assistant role are authorized to use the following endpoints.
 * [GET /actors](#get-actors)
-* [GET /actors/\<int:actor_id\>](#get-actorsintactorid)
+* [GET /actors/\<int:actor_id\>](#get-actorsintactor_id)
 * [GET /auditions](#get-auditions)
-* [GET /auditions/\<int:audition_id\>](#get-auditionsintauditionid)
+* [GET /auditions/\<int:audition_id\>](#get-auditionsintaudition_id)
 * [GET /movies](#get-movies)
-* [GET /movies/\<int:movie_id\>](#get-moviesintmovieid)
+* [GET /movies/\<int:movie_id\>](#get-moviesintmovie_id)
 
 Users in Director role are authorized to use the following endpoints, in addition to the endpoints authorized for Assistant role.
 * [POST /actors](#post-actors)
 * [POST /auditions](#post-auditions)
-* [PATCH /actors/\<int:actor_id\>](#patch-actorsintactorid)
-* [PATCH /auditions/\<int:audition_id\>](#patch-auditionsintauditionid)
-* [PATCH /movies/\<int:movie_id\>](#patch-moviesintmovieid)
-* [DELETE /actors/\<int:actor_id\>](#delete-actorsintactorid)
-* [DELETE /auditions/\<int:audition_id\>](#delete-auditionsintauditionid)
+* [PATCH /actors/\<int:actor_id\>](#patch-actorsintactor_id)
+* [PATCH /auditions/\<int:audition_id\>](#patch-auditionsintaudition_id)
+* [PATCH /movies/\<int:movie_id\>](#patch-moviesintmovie_id)
+* [DELETE /actors/\<int:actor_id\>](#delete-actorsintactor_id)
+* [DELETE /auditions/\<int:audition_id\>](#delete-auditionsintaudition_id)
 
 Users in Producer role are authorized to use the following endpoints, in addition to the endpoints authorized for Assistant and Director role.
 * [POST /movies](#post-movies)
-* [DELETE /movies](#delete-moviesintmovieid)
+* [DELETE /movies](#delete-moviesintmovie_id)
 
 ## API Endpoints
 ### Actor Related Endpoints
