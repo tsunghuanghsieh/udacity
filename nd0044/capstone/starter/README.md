@@ -82,7 +82,29 @@ Go to [Heroku](https://signup.heroku.com/) and create an account. [Create](https
 ## Local Run
 From the project folder, run `./runflask.sh`. The backend runs on http://127.0.0.1:5000/.
 
+## RBAC
+Users in Assistant role are authorized to use the following endpoints.
+* [GET /actors](#get-actors)
+* [GET /actors/<int:actor_id>](#get-actorsintactorid)
+* [GET /auditions](#get-auditions)
+* [GET /auditions/<int:audition_id>](#get-auditionsintauditionid)
+* [GET /movies](#get-movies)
+* [GET /movies/<int:movie_id>](#get-moviesintmovieid)
 
+Users in Director role are authorized to use the following endpoints, in addition to the endpoints authorized for Assistant role.
+* [POST /actors](#post-actors)
+* [POST /auditions](#post-auditions)
+* [PATCH /actors/<int:actor_id>](#patch-actorsintactorid)
+* [PATCH /auditions/<int:audition_id>](#patch-auditionsintauditionid)
+* [PATCH /movies/<int:movie_id>](#patch-moviesintmovieid)
+* [DELETE /actors/<int:actor_id>](#delete-actorsintactorid)
+* [DELETE /auditions/<int:audition_id>](#delete-auditionsintauditionid)
+
+Users in Producer role are authorized to use the following endpoints, in addition to the endpoints authorized for Assistant and Director role.
+* [POST /movies](#post-movies)
+* [DELETE /movies](#delete-moviesintmovieid)
+
+## API Endpoints
 ### Actor Related Endpoints
 #### GET /actors
 * Retrieve a dictionary of actors
