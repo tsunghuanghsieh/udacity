@@ -273,21 +273,104 @@ Sample response:
 ```
 
 ### Audition Related Enpoings
-```
-POST /auditions
-GET /auditions
-GET /auditions/<int:audition_id>
-DELETE /auditions/<int:audition_id>
-PATCH /auditions/<int:audition_id>
-```
-For POST and PATCH, it requires the following JSON object in the request body.
+#### GET /auditions
+* Retrieve a dictionary of auditions
+* Path Parameters: None
+* Request Payload: None
+* Response Payload: JSON object with a dictionary of auditions between actor and movie and request status.
+
+Sample response:
 ```
 {
-    "actor_id": actor_id_in_actors_table,
-    "movie_id" : movie_id_in_movies_table
+    "auditions": [
+        {
+            "actor_id": 1,
+            "id": 1,
+            "movie_id": 1
+        },
+        {
+            "actor_id": 1,
+            "id": 2,
+            "movie_id": 2
+        }
+    ],
+    "success": true
 }
 ```
 
+#### GET /auditions/<int:audition_id>
+* Retrieve details of an audition
+* Path Parameters: audition_id (INT) audition id
+* Request Payload: None
+* Response Payload: JSON object with audition details and request status.
+
+Sample response:
+```
+{
+    "auditions_detail": {
+        "actor_id": 1,
+        "id": 1,
+        "movie_id": 1
+    },
+    "success": true
+}
+```
+
+#### POST /auditions
+* Create an audition
+* Path Parameters: None
+* Request Payload: JSON object with audition details
+* Response Payload: JSON object with audition id and request status.
+
+Sample request payload:
+```
+{
+    "actor_id": 1,
+    "movie_id": 1
+}
+```
+Sample response:
+```
+{
+    "audition": 1,
+    "success": true
+}
+```
+
+#### PATCH /auditions/<int:audition_id>
+* Update audition details
+* Path Parameters: movie_id (INT) audition id
+* Request Payload: JSON object with audition details
+* Response Payload: JSON object with audition id and request status.
+
+Sample request payload:
+```
+{
+    "actor_id": 1,
+    "movie_id": 2
+}
+```
+Sample response:
+```
+{
+    "success": true,
+    "updated": 3
+}
+```
+
+#### DELETE /auditions/<int:audition_id>
+* Delete an audition
+* Path Parameters: audition_id (INT) audition id
+* Request Payload: None
+* Response Payload: JSON object with audition id and request status.
+
+Sample response:
+```
+{
+    "deleted": 2,
+    "success": true
+}
+```
 
 ## Unit Testing
 To run unit tests on all endpoints for RBAC, from project folder run `python3 ./test_app.py`. It mocks Auth0 JWT tokens.
