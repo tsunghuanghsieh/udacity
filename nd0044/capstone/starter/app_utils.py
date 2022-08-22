@@ -3,10 +3,8 @@ status_code_400 = { "status_code": 400 }
 status_code_500 = { "status_code": 500 }
 
 def parseRequestJson(type, body):
-  print("aa")
   if (body is None):
     return status_code_400
-  print("bb ")
   if (type == "actor"):
     if ("name" not in body):
       return status_code_400
