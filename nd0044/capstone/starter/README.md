@@ -85,20 +85,20 @@ From the project folder, run `./runflask.sh`. The backend runs on http://127.0.0
 ## RBAC
 Users in Assistant role are authorized to use the following endpoints.
 * [GET /actors](#get-actors)
-* [GET /actors/<int:actor_id>](#get-actorsintactorid)
+* [GET /actors/\<int:actor_id\>](#get-actorsintactorid)
 * [GET /auditions](#get-auditions)
-* [GET /auditions/<int:audition_id>](#get-auditionsintauditionid)
+* [GET /auditions/\<int:audition_id\>](#get-auditionsintauditionid)
 * [GET /movies](#get-movies)
-* [GET /movies/<int:movie_id>](#get-moviesintmovieid)
+* [GET /movies/\<int:movie_id\>](#get-moviesintmovieid)
 
 Users in Director role are authorized to use the following endpoints, in addition to the endpoints authorized for Assistant role.
 * [POST /actors](#post-actors)
 * [POST /auditions](#post-auditions)
-* [PATCH /actors/<int:actor_id>](#patch-actorsintactorid)
-* [PATCH /auditions/<int:audition_id>](#patch-auditionsintauditionid)
-* [PATCH /movies/<int:movie_id>](#patch-moviesintmovieid)
-* [DELETE /actors/<int:actor_id>](#delete-actorsintactorid)
-* [DELETE /auditions/<int:audition_id>](#delete-auditionsintauditionid)
+* [PATCH /actors/\<int:actor_id\>](#patch-actorsintactorid)
+* [PATCH /auditions/\<int:audition_id\>](#patch-auditionsintauditionid)
+* [PATCH /movies/\<int:movie_id\>](#patch-moviesintmovieid)
+* [DELETE /actors/\<int:actor_id\>](#delete-actorsintactorid)
+* [DELETE /auditions/\<int:audition_id\>](#delete-auditionsintauditionid)
 
 Users in Producer role are authorized to use the following endpoints, in addition to the endpoints authorized for Assistant and Director role.
 * [POST /movies](#post-movies)
@@ -123,7 +123,7 @@ Sample response:
 }
 ```
 
-#### GET /actors/<int:actor_id>
+#### GET /actors/\<int:actor_id\>
 
 * Retrieve details of an actor
 * Path Parameters: actor_id (INT) actor id
@@ -165,7 +165,7 @@ Sample response:
 }
 ```
 
-#### PATCH /actors/<int:actor_id>
+#### PATCH /actors/\<int:actor_id\>
 * Update actor details
 * Path Parameters: actor_id (INT) actor id
 * Request Payload: JSON object with actor details
@@ -187,7 +187,7 @@ Sample response:
 }
 ```
 
-#### DELETE /actors/<int:actor_id>
+#### DELETE /actors/\<int:actor_id\>
 * Delete actor
 * Path Parameters: actor_id (INT) actor id
 * Request Payload: None
@@ -220,7 +220,7 @@ Sample response:
 }
 ```
 
-#### GET /movies/<int:movie_id>
+#### GET /movies/\<int:movie_id\>
 * Retrieve details of a movie
 * Path Parameters: movie_id (INT) movie id
 * Request Payload: None
@@ -259,7 +259,7 @@ Sample response:
 }
 ```
 
-#### PATCH /movies/<int:movie_id>
+#### PATCH /movies/\<int:movie_id\>
 * Update movie details
 * Path Parameters: movie_id (INT) movie id
 * Request Payload: JSON object with movie details
@@ -280,7 +280,7 @@ Sample response:
 }
 ```
 
-#### DELETE /movies/<int:movie_id>
+#### DELETE /movies/\<int:movie_id\>
 * Delete a movie
 * Path Parameters: movie_id (INT) movie id
 * Request Payload: None
@@ -320,7 +320,7 @@ Sample response:
 }
 ```
 
-#### GET /auditions/<int:audition_id>
+#### GET /auditions/\<int:audition_id\>
 * Retrieve details of an audition
 * Path Parameters: audition_id (INT) audition id
 * Request Payload: None
@@ -359,7 +359,7 @@ Sample response:
 }
 ```
 
-#### PATCH /auditions/<int:audition_id>
+#### PATCH /auditions/\<int:audition_id\>
 * Update audition details
 * Path Parameters: movie_id (INT) audition id
 * Request Payload: JSON object with audition details
@@ -380,7 +380,7 @@ Sample response:
 }
 ```
 
-#### DELETE /auditions/<int:audition_id>
+#### DELETE /auditions/\<int:audition_id\>
 * Delete an audition
 * Path Parameters: audition_id (INT) audition id
 * Request Payload: None
