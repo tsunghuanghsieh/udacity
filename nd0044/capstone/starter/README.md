@@ -198,8 +198,7 @@ Sample response:
 ```
 
 #### GET /movies/<int:movie_id>
-
-* Retrieve details of an movie
+* Retrieve details of a movie
 * Path Parameters: movie_id (INT) movie id
 * Request Payload: None
 * Response Payload: JSON object with movie details and request status.
@@ -259,7 +258,7 @@ Sample response:
 ```
 
 #### DELETE /movies/<int:movie_id>
-* Delete movie
+* Delete a movie
 * Path Parameters: movie_id (INT) movie id
 * Request Payload: None
 * Response Payload: JSON object with movie id and request status.
