@@ -1,5 +1,8 @@
 # Capstone project Casting Agency
 
+## Description
+This project is used to help a casting agency to create movie and actor profiles, and manage matching between actors and movies. Users must be authorized to perform role-based requests to backend API. Authorization is enabled via Autho0, 3 roles, assistant, director and producer, are created and assigned separate permissions.
+
 ## Local Database Setup/Teardown
 You should have already sourced [source05.sh](https://github.com/tsunghuanghsieh/udacity/blob/main/nd0044/source05.sh) to create a separate python environment `fsd5` in Conda.
 
