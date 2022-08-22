@@ -399,5 +399,3 @@ To run unit tests on all endpoints for RBAC, from project folder run `python3 ./
 
 ## Heroku Deployment
 To deploy to Heroku, sign in using `heroku login -i` first and from project folder run `./deploy_heroku.sh` to deploy to https://boloh-capstone.herokuapp.com/
-
-For supported endpoints, please refer to [Actor Related Endpoints](#actor-related-endpoints), [Movie Related Endpoints](#movie-related-endpoints) and [Audition Related Endpoints](#audition-related-endpoints) for more details.
