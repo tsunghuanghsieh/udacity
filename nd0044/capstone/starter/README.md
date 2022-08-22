@@ -82,7 +82,8 @@ Go to [Heroku](https://signup.heroku.com/) and create an account. [Create](https
 ## Local Run
 From the project folder, run `./runflask.sh`. The backend runs on http://127.0.0.1:5000/.
 
-### Actor Related Enpoings
+
+### Actor Related Endpoints
 #### GET /actors
 * Retrieve a dictionary of actors
 * Path Parameters: None
@@ -178,7 +179,7 @@ Sample response:
 }
 ```
 
-### Movie Related Enpoings
+### Movie Related Endpoints
 #### GET /movies
 * Retrieve a dictionary of movies
 * Path Parameters: None
@@ -271,7 +272,7 @@ Sample response:
 }
 ```
 
-### Audition Related Enpoings
+### Audition Related Endpoints
 #### GET /auditions
 * Retrieve a dictionary of auditions
 * Path Parameters: None
@@ -377,4 +378,4 @@ To run unit tests on all endpoints for RBAC, from project folder run `python3 ./
 ## Heroku Deployment
 To deploy to Heroku, sign in using `heroku login -i` first and from project folder run `./deploy_heroku.sh` to deploy to https://boloh-capstone.herokuapp.com/
 
-For supported endpoints, please refer to [Actor Related Enpoings](#actor-related-enpoings), [Movie Related Enpoings](#movie-related-enpoings) and [Audition Related Enpoings](#audition-related-enpoings) for more details.
+For supported endpoints, please refer to [Actor Related Endpoints](#actor-related-endpoints), [Movie Related Endpoints](#movie-related-endpoints) and [Audition Related Endpoints](#audition-related-endpoints) for more details.
